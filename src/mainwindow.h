@@ -4,12 +4,13 @@
 #include <QMainWindow>
 #include "ui_mainwindow.h"
 #include "wait_time.h"
-#include <QWidget>
 
+#include <QWidget>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QFileDialog>
+#include <QThread>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -973,6 +974,7 @@ public:
             j++;
         }
     }
+
 private slots:
     void on_button_dir_db_clicked();
 
@@ -995,5 +997,13 @@ private:
     wait_time* wait; //обьект класса второго окна
 };
 
+class ExampleThreads : public QThread
+{
+public:
+    explicit ExampleThreads(QString threadName);
+    void run(QString start_stop);
+private:
+    QString name;
+};
 
 #endif // MAINWINDOW_H

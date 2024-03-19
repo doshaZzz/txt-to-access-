@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     wait = new wait_time; //инициализируем обьект окна
     wait->setModal(true); //делаем окно модальным,чтобы блокировались остальные окна
 
+
 }
 
 MainWindow::~MainWindow()
