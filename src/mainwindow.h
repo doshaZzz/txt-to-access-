@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui_mainwindow.h"
 #include "wait_time.h"
+#include <QWidget>
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -366,7 +367,7 @@ public:
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
         }
     }
-    QHash<int, QString> create_hash_opch() //создание хеша с opch
+    QHash<int, QString> create_hash_opch_EM() //создание хеша с opch
     {
         QHash<int, QString> opch;
 
@@ -387,6 +388,26 @@ public:
 
         return opch;
     }
+    QHash<int, QString> create_hash_opch_NT() //создание хеша с opch
+    {
+        QHash<int, QString> opch;
+        opch.insert(0,"AKS");
+        opch.insert(1,"MKS");
+        opch.insert(2,"ATS");
+        opch.insert(3,"ESGM");
+        opch.insert(4,"ESGS");
+        opch.insert(5,"ESGV");
+        opch.insert(6,"IBRN");
+        opch.insert(7,"ITEN");
+        opch.insert(8,"IVLN");
+        opch.insert(9,"KOM");
+        opch.insert(10,"REG");
+        opch.insert(11,"CRU");
+        opch.insert(12,"ICUM");
+        opch.insert(13,"ICUS");
+        opch.insert(14,"ICUV");
+        return opch;
+    }
     QHash<QString,QString> create_hash_names(QString path_names,QString number_eas, QFile &file_log) //создание хеша names
     {
         QHash<QString,QString> hash_names;
@@ -398,6 +419,7 @@ public:
                 QTextStream in(&file); //поток
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
+                in_log << '\n'; //чтобы лог писался с новой строки
                 while (!in.atEnd())
                 { //заполняем хеш мапу пока файл не кончится
                     QString line = in.readLine(); //сюда будем класть прочитанные строки
@@ -406,7 +428,7 @@ public:
                     }
                     else
                     {
-                        in_log << "Дубль: " << number_eas <<"."<< "names" << " " << line.section('|',0,1) << '\n';
+                        in_log << '\n' << "Дубль: " << number_eas <<"."<< "names" << " " << line.section('|',0,1) << '\n';
                         //return "Дубль в "+number_eas+".names "+line.section('|',0,1);
                     }
                 }
@@ -504,6 +526,10 @@ public:
         cabinets.insert("613","30CMS52");
         cabinets.insert("614","30CMS53");
 
+        /*ТЕСТОВЫЕ*/
+        cabinets.insert("406","ТЕСТ 406");
+        cabinets.insert("407","ТЕСТ 407");
+
         return cabinets;
     }
     void pars_names(QHash<QString, QString> enter_hash_names, QString enter_number_eas,QHash<QString, QString> enter_cabinets, QFile &file_log) //парсинг файлов и запрос к бд
@@ -536,7 +562,7 @@ public:
             j++;
         }
     }
-    QHash<QString,QString> create_hash_group(QString path_group1, QFile &file_log) //создание хеша aks,mks,faw,fbw,em,es,ibr,ite,ivl,ko,kr,sr,te,vl,alarms,delta
+    QHash<QString,QString> create_hash_group(QString path_group1, QFile &file_log) //создание хеша aks,mks,faw,fbw,em,es,ibr,ite,ivl,ko,kr,sr,te,vl,alarms,delta,ats,esgm,esgs,esgv,ibrn,iten,ivln,kom,reg,cru,icum,icus,icuv
     {
         QHash<QString,QString> hash_group1;
         QFile file(path_group1);
@@ -623,7 +649,7 @@ public:
         }
         return hash_ext_mode;
     }
-    void pars_group1(QString opch, QHash<QString, QString> enter_hash, QString enter_number_eas,QFile &file_log) //парсинг[EAS].aks[EAS].mks[EAS].faw[EAS].fbw
+    void pars_group1(QString opch, QHash<QString, QString> enter_hash, QString enter_number_eas,QFile &file_log) //парсинг[EAS].aks[EAS].mks[EAS].faw[EAS].fbw[EAS].ats
     {
         select_file file;
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
@@ -958,10 +984,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QVector<QString> select_all{".aks",".mks",".faw",".fbw",".em",".es",".ibr", ".ite", ".ivl", ".ko", ".kr",".sr", ".te", ".vl",
-                                    ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".ext_mod", ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names
-    QString dir_select; //путь к директории с селектами
-    QString data_base;  //путь к файлу базы данных
+    QVector<QString> select_all_EM{".aks",".mks",".faw",".fbw",".em",".es",".ibr", ".ite", ".ivl", ".ko", ".kr",".sr", ".te", ".vl",
+                                    ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".ext_mod", ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС ЕМ
+    QVector<QString> select_all_NT{".aks",".mks",".ats",".esgm",".esgs",".esgv", ".ibrn", ".iten", ".ivln", ".kom",".reg", ".cru", ".icum", ".icus", ".icuv",
+                                ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС НТ
+    QString dir_select = " "; //путь к директории с селектами
+    QString data_base = " ";  //путь к файлу базы данных
     QSqlDatabase db; //обьект база данных
     QSqlQuery query; //обьект запроса к бд
     wait_time* wait; //обьект класса второго окна

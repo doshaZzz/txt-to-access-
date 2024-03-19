@@ -2,22 +2,40 @@
 <ui version="4.0">
  <class>wait_time</class>
  <widget class="QDialog" name="wait_time">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>87</height>
+    <width>345</width>
+    <height>58</height>
    </rect>
+  </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>30</y>
+     <x>50</x>
+     <y>20</y>
      <width>291</width>
      <height>17</height>
     </rect>
