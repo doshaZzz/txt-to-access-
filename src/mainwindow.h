@@ -228,7 +228,6 @@ private:
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -454,7 +453,7 @@ public:
         cabinets.insert("102","30CMR02");
         cabinets.insert("103","30CMR03");
         cabinets.insert("104","30CMR04");
-        cabinets.insert("104","30CMR05");
+        cabinets.insert("105","30CMR05");
         cabinets.insert("106","30CMR06");
         cabinets.insert("107","30CMR07");
         cabinets.insert("108","30CMR08");
@@ -505,7 +504,7 @@ public:
         cabinets.insert("502","30CMW02");
         cabinets.insert("503","30CMW03");
         cabinets.insert("504","30CMW04");
-        cabinets.insert("504","30CMW05");
+        cabinets.insert("505","30CMW05");
         cabinets.insert("506","30CMW06");
         cabinets.insert("507","30CMW07");
         cabinets.insert("508","30CMW08");
@@ -516,7 +515,7 @@ public:
         cabinets.insert("602","30CMV02");
         cabinets.insert("603","30CMV03");
         cabinets.insert("604","30CMV04");
-        cabinets.insert("604","30CMV05");
+        cabinets.insert("605","30CMV05");
         cabinets.insert("606","30CMV06");
         cabinets.insert("607","30CMV07");
         cabinets.insert("608","30CMV08");
@@ -995,15 +994,6 @@ private:
     QSqlDatabase db; //обьект база данных
     QSqlQuery query; //обьект запроса к бд
     wait_time* wait; //обьект класса второго окна
-};
-
-class ExampleThreads : public QThread
-{
-public:
-    explicit ExampleThreads(QString threadName);
-    void run(QString start_stop);
-private:
-    QString name;
 };
 
 #endif // MAINWINDOW_H
