@@ -247,20 +247,20 @@ public:
         //создаем таблицу для TBL_DOP_INF
         if(!query.exec("CREATE TABLE TBL_DOP_INF"
                    "("
-                   "CABINET CHAR(100),"
-                   "KKS CHAR(100),"
-                   "SIGNAL CHAR(100),"
-                   "VERWE CHAR(100),"
-                   "OPD CHAR(100),"
-                   "OPCH CHAR(100),"
-                   "NOPCH CHAR(100),"
-                   "NAME_E CHAR(255),"
-                   "EA CHAR(100),"
-                   "BST_NR CHAR(100),"
-                   "SETTINGS_E CHAR(100),"
-                   "UNITS_E CHAR(100),"
-                   "MIN_ CHAR(100),"
-                   "MAX_ CHAR(100));"))
+                   "CABINET VARCHAR(100),"
+                   "KKS VARCHAR(100),"
+                   "SIGNAL VARCHAR(100),"
+                   "VERWE VARCHAR(100),"
+                   "OPD VARCHAR(100),"
+                   "OPCH VARCHAR(100),"
+                   "NOPCH VARCHAR(100),"
+                   "NAME_E VARCHAR(255),"
+                   "EA VARCHAR(100),"
+                   "BST_NR VARCHAR(100),"
+                   "SETTINGS_E VARCHAR(100),"
+                   "UNITS_E VARCHAR(100),"
+                   "MIN_ VARCHAR(100),"
+                   "MAX_ VARCHAR(100));"))
         {
             ui->listWidget_log->addItem(query.lastError().databaseText());
             ui->listWidget_log->scrollToBottom();
@@ -270,9 +270,9 @@ public:
         //создаем таблицу TBL_KLAPAN
         if(!query.exec("CREATE TABLE TBL_KLAPAN"
                    "("
-                   "CABINET CHAR(100),"
-                   "KL_KKS CHAR(100),"
-                   "TRVL_TIME CHAR(100));"))
+                   "CABINET VARCHAR(100),"
+                   "KL_KKS VARCHAR(100),"
+                   "TRVL_TIME VARCHAR(100));"))
         {
             ui->listWidget_log->addItem(query.lastError().databaseText());
             ui->listWidget_log->scrollToBottom();
@@ -283,10 +283,10 @@ public:
         //создаем таблицу TBL_KL_REG
         if(!query.exec("CREATE TABLE TBL_KL_REG"
                    "("
-                   "CABINET CHAR(10),"
-                   "EA CHAR(10),"
-                   "KL_KKS CHAR(100),"
-                   "REG_KKS CHAR(100));"))
+                   "CABINET VARCHAR(10),"
+                   "EA VARCHAR(10),"
+                   "KL_KKS VARCHAR(100),"
+                   "REG_KKS VARCHAR(100));"))
         {
             ui->listWidget_log->addItem(query.lastError().databaseText());
             ui->listWidget_log->scrollToBottom();
@@ -296,9 +296,9 @@ public:
         //создаем таблицу TBL_REGUL
         if(!query.exec("CREATE TABLE TBL_REGUL"
                    "("
-                   "REG_KKS CHAR(100),"
-                   "DAT_KKS CHAR(100),"
-                   "EA CHAR(10));"))
+                   "REG_KKS VARCHAR(100),"
+                   "DAT_KKS VARCHAR(100),"
+                   "EA VARCHAR(10));"))
 
         {
             ui->listWidget_log->addItem(query.lastError().databaseText());
@@ -309,9 +309,9 @@ public:
         //создаем таблицу TBL_MODUL
         if(!query.exec("CREATE TABLE TBL_MODUL"
                    "("
-                   "CABINET CHAR(10),"
-                   "M_TYPE CHAR(100),"
-                   "LOCATION CHAR(10),"
+                   "CABINET VARCHAR(10),"
+                   "M_TYPE VARCHAR(100),"
+                   "LOCATION VARCHAR(10),"
                    "PRIMARY KEY (CABINET, LOCATION));"))
 
         {
@@ -323,9 +323,9 @@ public:
         //создаем таблицу TBL_RESERV
         if(!query.exec("CREATE TABLE TBL_RESERV"
                    "("
-                   "EA CHAR(10),"
-                   "SLOT_MAIN CHAR(10),"
-                   "SLOT_RES CHAR(10));"))
+                   "EA VARCHAR(10),"
+                   "SLOT_MAIN VARCHAR(10),"
+                   "SLOT_RES VARCHAR(10));"))
 
         {
             ui->listWidget_log->addItem(query.lastError().databaseText());
@@ -335,9 +335,9 @@ public:
         //создаем таблицу TBL_VL_IVL
         if(!query.exec("CREATE TABLE TBL_VL_IVL"
                    "("
-                   "KKS CHAR(100),"
-                   "TYPE CHAR(100),"
-                   "EA CHAR(10));"))
+                   "KKS VARCHAR(100),"
+                   "TYPE VARCHAR(100),"
+                   "EA VARCHAR(10));"))
 
         {
             ui->listWidget_log->addItem(query.lastError().databaseText());
