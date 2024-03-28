@@ -11,9 +11,10 @@
 #include <QSqlError>
 #include <QFileDialog>
 #include <QThread>
+#include <QMetaType>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {class MainWindow;}
 QT_END_NAMESPACE
 
 class select_file
@@ -225,12 +226,143 @@ private:
 };
 
 
-class MainWindow : public QMainWindow
+class Worker : public QObject
 {
     Q_OBJECT
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit Worker(QObject* parent = nullptr);
+    void create_tables(QFile &file_log) //создание таблиц
+    {
+        //создаем таблицу для TBL_DOP_INF
+        if(!query.exec("CREATE TABLE TBL_DOP_INF"
+                        "("
+                        "CABINET VARCHAR(100),"
+                        "KKS VARCHAR(100),"
+                        "SIGNAL VARCHAR(100),"
+                        "VERWE VARCHAR(100),"
+                        "OPD VARCHAR(100),"
+                        "OPCH VARCHAR(100),"
+                        "NOPCH VARCHAR(100),"
+                        "NAME_E VARCHAR(255),"
+                        "EA VARCHAR(100),"
+                        "BST_NR VARCHAR(100),"
+                        "SETTINGS_E VARCHAR(100),"
+                        "UNITS_E VARCHAR(100),"
+                        "MIN_ VARCHAR(100),"
+                        "MAX_ VARCHAR(100));"))
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+
+        //создаем таблицу TBL_KLAPAN
+        if(!query.exec("CREATE TABLE TBL_KLAPAN"
+                        "("
+                        "CABINET VARCHAR(100),"
+                        "KL_KKS VARCHAR(100),"
+                        "TRVL_TIME VARCHAR(100));"))
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+
+
+        //создаем таблицу TBL_KL_REG
+        if(!query.exec("CREATE TABLE TBL_KL_REG"
+                        "("
+                        "CABINET VARCHAR(10),"
+                        "EA VARCHAR(10),"
+                        "KL_KKS VARCHAR(100),"
+                        "REG_KKS VARCHAR(100));"))
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+
+        //создаем таблицу TBL_REGUL
+        if(!query.exec("CREATE TABLE TBL_REGUL"
+                        "("
+                        "REG_KKS VARCHAR(100),"
+                        "DAT_KKS VARCHAR(100),"
+                        "EA VARCHAR(10));"))
+
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+
+        //создаем таблицу TBL_MODUL
+        if(!query.exec("CREATE TABLE TBL_MODUL"
+                        "("
+                        "CABINET VARCHAR(10),"
+                        "M_TYPE VARCHAR(100),"
+                        "LOCATION VARCHAR(10),"
+                        "PRIMARY KEY (CABINET, LOCATION));"))
+
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+
+        //создаем таблицу TBL_RESERV
+        if(!query.exec("CREATE TABLE TBL_RESERV"
+                        "("
+                        "EA VARCHAR(10),"
+                        "SLOT_MAIN VARCHAR(10),"
+                        "SLOT_RES VARCHAR(10));"))
+
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+        //создаем таблицу TBL_VL_IVL
+        if(!query.exec("CREATE TABLE TBL_VL_IVL"
+                        "("
+                        "KKS VARCHAR(100),"
+                        "TYPE VARCHAR(100),"
+                        "EA VARCHAR(10));"))
+
+        {
+            file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            QTextStream in_log(&file_log); //поток в лог
+            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
+            file_log.close();
+            //ui->listWidget_log->addItem(query.lastError().databaseText());
+            //ui->listWidget_log->scrollToBottom();
+            qDebug() << query.lastError().databaseText();
+        }
+
+    }
     QString swap_slesh(QString path) //замена слешей для windows
     {
         for(int i = 0; i < path.size(); i++)
@@ -241,124 +373,6 @@ public:
             }
         }
         return path;
-    }
-    void create_tables() //создание таблиц
-    {
-        //создаем таблицу для TBL_DOP_INF
-        if(!query.exec("CREATE TABLE TBL_DOP_INF"
-                   "("
-                   "CABINET VARCHAR(100),"
-                   "KKS VARCHAR(100),"
-                   "SIGNAL VARCHAR(100),"
-                   "VERWE VARCHAR(100),"
-                   "OPD VARCHAR(100),"
-                   "OPCH VARCHAR(100),"
-                   "NOPCH VARCHAR(100),"
-                   "NAME_E VARCHAR(255),"
-                   "EA VARCHAR(100),"
-                   "BST_NR VARCHAR(100),"
-                   "SETTINGS_E VARCHAR(100),"
-                   "UNITS_E VARCHAR(100),"
-                   "MIN_ VARCHAR(100),"
-                   "MAX_ VARCHAR(100));"))
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-
-        //создаем таблицу TBL_KLAPAN
-        if(!query.exec("CREATE TABLE TBL_KLAPAN"
-                   "("
-                   "CABINET VARCHAR(100),"
-                   "KL_KKS VARCHAR(100),"
-                   "TRVL_TIME VARCHAR(100));"))
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-
-
-        //создаем таблицу TBL_KL_REG
-        if(!query.exec("CREATE TABLE TBL_KL_REG"
-                   "("
-                   "CABINET VARCHAR(10),"
-                   "EA VARCHAR(10),"
-                   "KL_KKS VARCHAR(100),"
-                   "REG_KKS VARCHAR(100));"))
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-
-        //создаем таблицу TBL_REGUL
-        if(!query.exec("CREATE TABLE TBL_REGUL"
-                   "("
-                   "REG_KKS VARCHAR(100),"
-                   "DAT_KKS VARCHAR(100),"
-                   "EA VARCHAR(10));"))
-
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-
-        //создаем таблицу TBL_MODUL
-        if(!query.exec("CREATE TABLE TBL_MODUL"
-                   "("
-                   "CABINET VARCHAR(10),"
-                   "M_TYPE VARCHAR(100),"
-                   "LOCATION VARCHAR(10),"
-                   "PRIMARY KEY (CABINET, LOCATION));"))
-
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-
-        //создаем таблицу TBL_RESERV
-        if(!query.exec("CREATE TABLE TBL_RESERV"
-                   "("
-                   "EA VARCHAR(10),"
-                   "SLOT_MAIN VARCHAR(10),"
-                   "SLOT_RES VARCHAR(10));"))
-
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-        //создаем таблицу TBL_VL_IVL
-        if(!query.exec("CREATE TABLE TBL_VL_IVL"
-                   "("
-                   "KKS VARCHAR(100),"
-                   "TYPE VARCHAR(100),"
-                   "EA VARCHAR(10));"))
-
-        {
-            ui->listWidget_log->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << query.lastError().databaseText();
-        }
-
-    }
-    void del_table(QString name_table) //функция удаления таблицы
-    {
-        if(!query.exec("DROP TABLE "+name_table+"")) //удаление таблицы из бд
-        {
-            ui->listWidget_log ->addItem(query.lastError().databaseText());
-            ui->listWidget_log->scrollToBottom();
-        }
-        else
-        {
-            ui->listWidget_log->addItem("Таблица "+name_table+" удалена");
-            ui->listWidget_log->scrollToBottom();
-            qDebug() << "Таблица "+name_table+" удалена";
-        }
     }
     void pause(int sec) //пауза
     {
@@ -437,13 +451,18 @@ public:
             }
             else
             {
-                ui->listWidget_log->addItem(path_names+" is not open");
-                ui->listWidget_log->scrollToBottom();
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << path_names+" is not open" << '\n'; //чтобы лог писался с новой строки
+                file.close();
+                file_log.close();
+                // ui->listWidget_log->addItem(path_names+" is not open");
+                // ui->listWidget_log->scrollToBottom();
                 qDebug() << path_names+" is not open";
             }
             return hash_names;
         }
-    return hash_names;
+        return hash_names;
     }
     QHash<QString, QString> create_hash_cabinets() //создание хеша с кабинетами
     {
@@ -551,7 +570,7 @@ public:
             names.setverwe(j.value().section('|',3,3));
 
             if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, NAME_E, VERWE, EA) "
-                           "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getname_e()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                            "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getname_e()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 qDebug() << query.lastError().databaseText();
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
@@ -583,8 +602,13 @@ public:
             }
             else
             {
-                ui->listWidget_log->addItem(path_group1+" is not open");
-                ui->listWidget_log->scrollToBottom();
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << path_group1+" is not open" << '\n'; //чтобы лог писался с новой строки
+                file.close();
+                file_log.close();
+                //ui->listWidget_log->addItem(path_group1+" is not open");
+                //ui->listWidget_log->scrollToBottom();
                 qDebug() << path_group1+" is not open";
             }
             return hash_group1;
@@ -612,8 +636,13 @@ public:
             }
             else
             {
-                ui->listWidget_log->addItem(path_group_one+" is not open");
-                ui->listWidget_log->scrollToBottom();
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << path_group_one+" is not open" << '\n'; //чтобы лог писался с новой строки
+                file.close();
+                file_log.close();
+                //ui->listWidget_log->addItem(path_group_one+" is not open");
+                //ui->listWidget_log->scrollToBottom();
                 qDebug() << path_group_one+" is not open";
             }
             return hash_group_one;
@@ -641,8 +670,13 @@ public:
             }
             else
             {
-                ui->listWidget_log->addItem(path_ext_mode+" is not open");
-                ui->listWidget_log->scrollToBottom();
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << path_ext_mode+" is not open" << '\n'; //чтобы лог писался с новой строки
+                file.close();
+                file_log.close();
+                //ui->listWidget_log->addItem(path_ext_mode+" is not open");
+                //ui->listWidget_log->scrollToBottom();
                 qDebug() << path_ext_mode+" is not open";
             }
             return hash_ext_mode;
@@ -668,8 +702,8 @@ public:
             file.setopch(opch);
 
             if(!query.exec("update TBL_DOP_INF "
-                           "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                           "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                            "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
+                                                                                                                       "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
@@ -700,7 +734,7 @@ public:
 
             if(!query.exec("update TBL_DOP_INF "
                             "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                            "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                                                                                                                       "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
@@ -735,7 +769,7 @@ public:
 
             if(!query.exec("update TBL_DOP_INF "
                             "set SETTINGS_E = '"+file.getsettings_e()+"', UNITS_E = '"+file.getunits_e()+"' "
-                             "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND SETTINGS_E is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                                                                                            "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND SETTINGS_E is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
@@ -774,7 +808,7 @@ public:
 
             if(!query.exec("update TBL_DOP_INF "
                             "set MIN_ = '"+file.getmin()+"', MAX_ = '"+file.getmax()+"', UNITS_E = '"+file.getunits_e()+"'  "
-                            "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND MIN_ is null AND MAX_ is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                                                                                                                     "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND MIN_ is null AND MAX_ is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
@@ -962,7 +996,7 @@ public:
             file.settype(j.value());
 
             if(!query.exec("INSERT INTO TBL_VL_IVL (KKS, TYPE, EA) "
-                           "VALUES('"+file.getkks()+"' , '"+file.gettype()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                            "VALUES('"+file.getkks()+"' , '"+file.gettype()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
@@ -974,6 +1008,58 @@ public:
         }
     }
 
+public slots:
+    void slot_operationEM(QString dirSelect, QSqlDatabase db);
+    void slot_operationNT(QString dirSelect, QSqlDatabase db);
+signals:
+    void signal_closeWait();
+private:
+    QVector<QString> select_all_EM{".aks",".mks",".faw",".fbw",".em",".es",".ibr", ".ite", ".ivl", ".ko", ".kr",".sr", ".te", ".vl",
+                                   ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".ext_mod", ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС ЕМ
+    QVector<QString> select_all_NT{".aks",".mks",".ats",".esgm",".esgs",".esgv", ".ibrn", ".iten", ".ivln", ".kom",".reg", ".cru", ".icum", ".icus", ".icuv",
+                                   ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС НТ
+    QString dir_select = nullptr; //путь к директории с селектами
+    QString data_base = " ";  //путь к файлу базы данных
+    QSqlDatabase db; //обьект база данных
+    QSqlQuery query; //обьект запроса к бд
+};
+
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+    QString swap_slesh(QString path) //замена слешей для windows
+    {
+        for(int i = 0; i < path.size(); i++)
+        {
+            if(path[i] == '/')
+            {
+                path.replace(i, 1,"\\\\");
+            }
+        }
+        return path;
+    }
+    void del_table(QString name_table) //функция удаления таблицы
+    {
+        if(!query.exec("DROP TABLE "+name_table+"")) //удаление таблицы из бд
+        {
+            ui->listWidget_log ->addItem(query.lastError().databaseText());
+            ui->listWidget_log->scrollToBottom();
+        }
+        else
+        {
+            ui->listWidget_log->addItem("Таблица "+name_table+" удалена");
+            ui->listWidget_log->scrollToBottom();
+            qDebug() << "Таблица "+name_table+" удалена";
+        }
+    }
+
+public slots:
+    void slot_closeWait();
 private slots:
     void on_button_dir_db_clicked();
 
@@ -983,17 +1069,23 @@ private slots:
 
     void on_button_start_clicked();
 
+signals:
+    void signal_operationEM(QString, QSqlDatabase);
+    void signal_operationNT(QString,QSqlDatabase);
 private:
-    Ui::MainWindow *ui;
-    QVector<QString> select_all_EM{".aks",".mks",".faw",".fbw",".em",".es",".ibr", ".ite", ".ivl", ".ko", ".kr",".sr", ".te", ".vl",
-                                    ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".ext_mod", ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС ЕМ
-    QVector<QString> select_all_NT{".aks",".mks",".ats",".esgm",".esgs",".esgv", ".ibrn", ".iten", ".ivln", ".kom",".reg", ".cru", ".icum", ".icus", ".icuv",
-                                ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС НТ
-    QString dir_select = " "; //путь к директории с селектами
+    Ui::MainWindow* ui;
+    wait_time* wait; //обьект класса второго окна
+    Worker* pW;
+    QString dir_select = nullptr; //путь к директории с селектами
     QString data_base = " ";  //путь к файлу базы данных
+    // QString path_log;
     QSqlDatabase db; //обьект база данных
     QSqlQuery query; //обьект запроса к бд
-    wait_time* wait; //обьект класса второго окна
+    // QVector<QString> select_all_EM{".aks",".mks",".faw",".fbw",".em",".es",".ibr", ".ite", ".ivl", ".ko", ".kr",".sr", ".te", ".vl",
+    //                                ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".ext_mod", ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС ЕМ
+    // QVector<QString> select_all_NT{".aks",".mks",".ats",".esgm",".esgs",".esgv", ".ibrn", ".iten", ".ivln", ".kom",".reg", ".cru", ".icum", ".icus", ".icuv",
+    //                                ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС НТ
+    QThread* pThread;
+//    QHash<QString,QString> hash_names;
 };
-
 #endif // MAINWINDOW_H

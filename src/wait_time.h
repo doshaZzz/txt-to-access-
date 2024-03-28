@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::wait_time *ui;
+public slots:
 };
 
 #endif // WAIT_TIME_H
