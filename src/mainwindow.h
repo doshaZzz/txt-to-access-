@@ -110,6 +110,10 @@ public:
     {
         this->slot_res = enter_slot_res;
     }
+    void setdelta(QString enter_setdelta)
+    {
+        this->delta = enter_setdelta;
+    }
 
     //get foo
     QString getkks()
@@ -200,6 +204,10 @@ public:
     {
         return this->slot_res;
     }
+    QString getdelta()
+    {
+        return this->delta;
+    }
 private:
     QString kks;
     QString signal;
@@ -223,6 +231,7 @@ private:
     QString location;
     QString slot_main;
     QString slot_res;
+    QString delta;
 };
 
 
@@ -248,13 +257,15 @@ public:
                         "BST_NR VARCHAR(100),"
                         "SETTINGS_E VARCHAR(100),"
                         "UNITS_E VARCHAR(100),"
+                        "DELTA VARCHAR(100),"
                         "MIN_ VARCHAR(100),"
                         "MAX_ VARCHAR(100));"))
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
             qDebug() << query.lastError().databaseText();
@@ -267,12 +278,13 @@ public:
                         "KL_KKS VARCHAR(100),"
                         "TRVL_TIME VARCHAR(100));"))
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             qDebug() << query.lastError().databaseText();
         }
 
@@ -285,12 +297,13 @@ public:
                         "KL_KKS VARCHAR(100),"
                         "REG_KKS VARCHAR(100));"))
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             qDebug() << query.lastError().databaseText();
         }
 
@@ -302,12 +315,13 @@ public:
                         "EA VARCHAR(10));"))
 
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             qDebug() << query.lastError().databaseText();
         }
 
@@ -320,12 +334,13 @@ public:
                         "PRIMARY KEY (CABINET, LOCATION));"))
 
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             qDebug() << query.lastError().databaseText();
         }
 
@@ -337,12 +352,13 @@ public:
                         "SLOT_RES VARCHAR(10));"))
 
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             qDebug() << query.lastError().databaseText();
         }
         //создаем таблицу TBL_VL_IVL
@@ -353,12 +369,13 @@ public:
                         "EA VARCHAR(10));"))
 
         {
-            file_log.open(QIODevice::Append); //открываем новый файл  на запись
-            QTextStream in_log(&file_log); //поток в лог
-            in_log << query.lastError().databaseText()+" is not open" << '\n'; //чтобы лог писался с новой строки
-            file_log.close();
+            //file_log.open(QIODevice::Append); //открываем новый файл  на запись
+            //QTextStream in_log(&file_log); //поток в лог
+            //in_log << query.lastError().databaseText()+" is not open"<< '\n'; //чтобы лог писался с новой строки
+            //file_log.close();
             //ui->listWidget_log->addItem(query.lastError().databaseText());
             //ui->listWidget_log->scrollToBottom();
+            emit signal_wrightWidgLog(query.lastError().databaseText());
             qDebug() << query.lastError().databaseText();
         }
 
@@ -433,7 +450,7 @@ public:
                 QTextStream in(&file); //поток
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << '\n'; //чтобы лог писался с новой строки
+                //in_log << '\n'; //чтобы лог писался с новой строки
                 while (!in.atEnd())
                 { //заполняем хеш мапу пока файл не кончится
                     QString line = in.readLine(); //сюда будем класть прочитанные строки
@@ -442,8 +459,7 @@ public:
                     }
                     else
                     {
-                        in_log << '\n' << "Дубль: " << number_eas <<"."<< "names" << " " << line.section('|',0,1) << '\n';
-                        //return "Дубль в "+number_eas+".names "+line.section('|',0,1);
+                        in_log << "Сигнал "<<  line.section('|',0,1) <<"; Данный сигнал не записан в базу т.к там уже имеется такой сигнал. Дубль в файле "<< path_names<< '\n';
                     }
                 }
                 file.close();
@@ -453,9 +469,10 @@ public:
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << path_names+" is not open" << '\n'; //чтобы лог писался с новой строки
+                in_log << path_names+" is not open"<< '\n'; //чтобы лог писался с новой строки
                 file.close();
                 file_log.close();
+                emit signal_wrightWidgLog(path_names+" is not open");
                 // ui->listWidget_log->addItem(path_names+" is not open");
                 // ui->listWidget_log->scrollToBottom();
                 qDebug() << path_names+" is not open";
@@ -464,7 +481,7 @@ public:
         }
         return hash_names;
     }
-    QHash<QString, QString> create_hash_cabinets() //создание хеша с кабинетами
+    QHash<QString,QString> create_hash_cabinets() //создание хеша с кабинетами
     {
         QHash<QString, QString> cabinets;
         /*птк ску ро*/
@@ -551,37 +568,7 @@ public:
 
         return cabinets;
     }
-    void pars_names(QHash<QString, QString> enter_hash_names, QString enter_number_eas,QHash<QString, QString> enter_cabinets, QFile &file_log) //парсинг файлов и запрос к бд
-    {
-        select_file names; //создали обьект файла неймс
-        QHash<QString, QString>::const_iterator j = enter_hash_names.constBegin();
-        while (j != enter_hash_names.constEnd())
-        {
-            names.setea(enter_number_eas);
-
-            names.setcabinet(enter_cabinets.value(enter_number_eas));
-
-            names.setkks(j.value().section('|',0,0));
-
-            names.setsignal(j.value().section('|',1,1));
-
-            names.setname_e(j.value().section('|',2,2));
-
-            names.setverwe(j.value().section('|',3,3));
-
-            if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, NAME_E, VERWE, EA) "
-                            "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getname_e()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
-            {
-                qDebug() << query.lastError().databaseText();
-                file_log.open(QIODevice::Append); //открываем новый файл  на запись
-                QTextStream in_log(&file_log); //поток в лог
-                in_log <<"Сигнал не добавлен в таблицу:" << enter_number_eas << " " << names.getkks() << " " << names.getsignal() << '\n';
-                file_log.close();
-            }
-            j++;
-        }
-    }
-    QHash<QString,QString> create_hash_group(QString path_group1, QFile &file_log) //создание хеша aks,mks,faw,fbw,em,es,ibr,ite,ivl,ko,kr,sr,te,vl,alarms,delta,ats,esgm,esgs,esgv,ibrn,iten,ivln,kom,reg,cru,icum,icus,icuv
+    QHash<QString,QString> create_hash_group(QString path_group1, QFile &file_log) //создание хеша aks,mks,faw,fbw,alarms,delta,ats,esgm,esgs,esgv,ibrn,iten,ivln,kom,reg,cru,icum,icus,icuv
     {
         QHash<QString,QString> hash_group1;
         QFile file(path_group1);
@@ -595,7 +582,11 @@ public:
                 while (!in.atEnd())
                 { //заполняем хеш мапу пока файл не кончится
                     QString line = in.readLine(); //сюда будем класть прочитанные строки
-                    hash_group1.insert(line.section('|',0,1),line); //добавляем в ключ ккс и сигнал,а в значение строку целиком в хешмап
+                    if(!hash_group1.contains(line.section('|',0,1))){
+                        hash_group1.insert(line.section('|',0,1),line); //добавляем в ключ ккс и сигнал,а в значение строку целиком в хешмап
+                    }else{
+                        in_log << "Сигнал " <<  line.section('|',0,1) << "; Данный сигнал не записан в базу т.к там уже имеется такой сигнал. Дубль в файле "<< path_group1 << '\n';
+                    }
                 }
                 file.close();
                 file_log.close();
@@ -604,18 +595,18 @@ public:
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << path_group1+" is not open" << '\n'; //чтобы лог писался с новой строки
+                in_log << path_group1+" is not open"<< '\n'; //чтобы лог писался с новой строки
                 file.close();
                 file_log.close();
                 //ui->listWidget_log->addItem(path_group1+" is not open");
                 //ui->listWidget_log->scrollToBottom();
-                qDebug() << path_group1+" is not open";
+                qDebug() << path_group1+" is not open"<< '\n';
             }
             return hash_group1;
         }
         return hash_group1;
     }
-    QHash<QString,QString> create_hash_group_one(QString path_group_one, QFile &file_log) //создание хеша kl_reg,regul,res_mod,sr_kr,vl_ivl
+    QHash<QString,QString> create_hash_group_one(QString path_group_one, QFile &file_log) //создание хеша res_mod,sr_kr,vl_ivl
     {
         QHash<QString,QString> hash_group_one;
         QFile file(path_group_one);
@@ -629,7 +620,11 @@ public:
                 while (!in.atEnd())
                 { //заполняем хеш мапу пока файл не кончится
                     QString line = in.readLine(); //сюда будем класть прочитанные строки
-                    hash_group_one.insert(line.section('|',0,0),line.section('|',1,1));
+                    if(!hash_group_one.contains(line.section('|',0,0))){
+                        hash_group_one.insert(line.section('|',0,0),line.section('|',1,1));
+                    }else{
+                        in_log << "Сигнал: " <<  line.section('|',0,0) << ". Данный сигнал не будет записан в базу т.к там уже имеется такой сигнал. Дубль cигнала в файле " << path_group_one << '\n';
+                    }
                 }
                 file.close();
                 file_log.close();
@@ -643,11 +638,87 @@ public:
                 file_log.close();
                 //ui->listWidget_log->addItem(path_group_one+" is not open");
                 //ui->listWidget_log->scrollToBottom();
-                qDebug() << path_group_one+" is not open";
+                qDebug() << path_group_one+" is not open"<< '\n';
             }
             return hash_group_one;
         }
         return hash_group_one;
+    }
+    QHash<QString,QString> create_hash_group_reg(QString path_group_reg, QFile &file_log) //создание хеша kl_reg,regul
+    {
+        QHash<QString,QString> hash_group_reg;
+        QFile file(path_group_reg);
+        if(file.size()!=0)
+        {
+            if(file.open(QIODevice::ReadOnly))
+            {
+                QTextStream in(&file); //поток
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                while (!in.atEnd())
+                { //заполняем хеш мапу пока файл не кончится
+                    QString line = in.readLine(); //сюда будем класть прочитанные строки
+                    if(!hash_group_reg.contains(line)){
+                        hash_group_reg.insert(line,line);
+                    }else{
+                        in_log << "Регулятор: " <<  line.section('|',0,0) << ". Данный регулятор не будет записан в базу т.к там уже имеется такой регулятор. Дубль регулятора в файле " << path_group_reg << '\n';
+                    }
+                }
+                file.close();
+                file_log.close();
+            }
+            else
+            {
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << path_group_reg+" is not open" << '\n'; //чтобы лог писался с новой строки
+                file.close();
+                file_log.close();
+                //ui->listWidget_log->addItem(path_group_one+" is not open");
+                //ui->listWidget_log->scrollToBottom();
+                qDebug() << path_group_reg+" is not open"<< '\n';
+            }
+            return hash_group_reg;
+        }
+        return hash_group_reg;
+    }
+    QHash<QString,QString> create_hash_group_equip(QString path_group_equip, QFile &file_log) //создание хеша em,es,ibr,ite,ivl,ko,kr,sr,te,vl
+    {
+        QHash<QString,QString> hash_group_equip;
+        QFile file(path_group_equip);
+        if(file.size()!=0)
+        {
+            if(file.open(QIODevice::ReadOnly))
+            {
+                QTextStream in(&file); //поток
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                while (!in.atEnd())
+                { //заполняем хеш мапу пока файл не кончится
+                    QString line = in.readLine(); //сюда будем класть прочитанные строки
+                    if(!hash_group_equip.contains(line.section('|',0,0))){
+                        hash_group_equip.insert(line.section('|',0,0),line);
+                    }else{
+                        in_log << "Сигнал : " <<  line.section('|',0,0) << ". Данный сигнал не будет записан в базу т.к там уже имеется такой сигнал. Дубль cигнала в файле " << path_group_equip<< '\n';
+                    }
+                }
+                file.close();
+                file_log.close();
+            }
+            else
+            {
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << path_group_equip+" is not open" << '\n'; //чтобы лог писался с новой строки
+                file.close();
+                file_log.close();
+                //ui->listWidget_log->addItem(path_group_one+" is not open");
+                //ui->listWidget_log->scrollToBottom();
+                qDebug() << path_group_equip+" is not open"<< '\n';
+            }
+            return hash_group_equip;
+        }
+        return hash_group_equip;
     }
     QHash<QString,QString> create_hash_ext_mode(QString path_ext_mode,QString enter_number_eas, QFile &file_log) //создание хеша ext_mod
     {
@@ -677,7 +748,7 @@ public:
                 file_log.close();
                 //ui->listWidget_log->addItem(path_ext_mode+" is not open");
                 //ui->listWidget_log->scrollToBottom();
-                qDebug() << path_ext_mode+" is not open";
+                qDebug() << path_ext_mode+" is not open"<< '\n';
             }
             return hash_ext_mode;
         }
@@ -693,21 +764,20 @@ public:
 
             file.setbst_nr(j.value().section('|',4,4));
 
-            //file.setcabinet(enter_cabinets.value(enter_number_eas));
-
             file.setkks(j.value().section('|',0,0));
 
             file.setsignal(j.value().section('|',1,1));
 
             file.setopch(opch);
 
-            if(!query.exec("update TBL_DOP_INF "
-                            "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                                                                                                                       "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
-            {
+            query.exec("update TBL_DOP_INF "
+                        "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
+                        "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            //qDebug() << "numRowsAffected = " << query.numRowsAffected();
+            if(query.numRowsAffected() < 1){
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "В этот сигнал не дописались поля:" << opch << " " << enter_number_eas << " " << file.getkks() << " " << file.getsignal() << '\n';
+                in_log << "Сигнал: " << file.getkks() << " " << file.getsignal() <<" "<< file.getopch() <<" EAS "+enter_number_eas+". Таблица TBL_DOP_INF. Не удалось добавить сигнал в базу. Вероятно его нет в файле "+enter_number_eas+".names"<< '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -724,23 +794,53 @@ public:
 
             file.setbst_nr(j.value().section('|',2,2));
 
-            //file.setcabinet(enter_cabinets.value(enter_number_eas));
-
             file.setkks(j.value().section('|',0,0));
-
-            //file.setsignal(j.value().section('|',1,1));
 
             file.setopch(opch);
 
-            if(!query.exec("update TBL_DOP_INF "
-                            "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                                                                                                                       "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"'  AND OPCH is null AND NOPCH is null AND BST_NR is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            query.exec("update TBL_DOP_INF "
+                        "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
+                        "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='"+nullptr+"' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(query.numRowsAffected() < 1)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "В этот сигнал не дописались поля:" << opch << " " << enter_number_eas << " " << file.getkks() << " " << file.getsignal() << '\n';
-                qDebug() << query.lastError().databaseText();
+                in_log << "Сигнал: " << file.getkks() <<" " << file.getopch() << " EAS "+enter_number_eas+". Таблица TBL_DOP_INF. Не удалось добавить сигнал в базу. Вероятно его нет в файле "+enter_number_eas+".names"<< '\n';
+                qDebug() << query.numRowsAffected();
                 file_log.close();
+            }
+            j++;
+        }
+    }
+    void pars_group_te_vl(QString opch, QHash<QString, QString> enter_hash, QString enter_number_eas,QHash<QString, QString> enter_cabinets, QFile &file_log) //.te[EAS].vl .iten .ivln
+    {
+        select_file file;
+        QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
+        while (j != enter_hash.constEnd())
+        {
+            file.setcabinet(enter_cabinets.value(enter_number_eas));
+
+            file.setnopch(j.value().section('|',1,1));
+
+            file.setbst_nr(j.value().section('|',2,2));
+
+            file.setkks(j.value().section('|',0,0));
+
+            file.setopch(opch);
+
+            query.exec("update TBL_DOP_INF "
+                       "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
+                                                                                                                  "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='"+nullptr+"' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(query.numRowsAffected() < 1)
+            {
+                if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, OPCH, NOPCH, EA, BST_NR) "
+                                "VALUES('"+file.getcabinet()+"' , '"+file.getkks()+"' , '"+file.getopch()+"' , '"+file.getnopch()+"' , '"+file.getea()+"' , '"+file.getbst_nr()+"')")){
+                    file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                    QTextStream in_log(&file_log); //поток в лог
+                    in_log << "Сигнал: " << file.getkks() <<" "<< file.getopch() <<"; EAS "+enter_number_eas+"; Таблица TBL_DOP_INF; Не удалось добавить сигнал в базу."<< '\n';
+                    qDebug() << query.numRowsAffected();
+                    file_log.close();
+                }
             }
             j++;
         }
@@ -751,29 +851,26 @@ public:
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
         while (j != enter_hash.constEnd())
         {
-            //file.setnopch(j.value().section('|',1,1));
-
-            //file.setbst_nr(j.value().section('|',2,2));
-
-            //file.setcabinet(enter_cabinets.value(enter_number_eas));
-
             file.setkks(j.value().section('|',0,0));
 
             file.setsignal(j.value().section('|',1,1));
 
-            file.setsettings_e(j.value().section('|',2,2));
+            //file.setsettings_e(j.value().section('|',2,2));
 
             file.setunits_e(j.value().section('|',5,5));
 
-            //file.setopch(opch);
-
-            if(!query.exec("update TBL_DOP_INF "
-                            "set SETTINGS_E = '"+file.getsettings_e()+"', UNITS_E = '"+file.getunits_e()+"' "
-                                                                                            "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND SETTINGS_E is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            //Убрали чтобы не записывать settings в базу
+            //if(!query.exec("update TBL_DOP_INF "
+            //                "set SETTINGS_E = '"+file.getsettings_e()+"', UNITS_E = '"+file.getunits_e()+"' "
+            //               "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND SETTINGS_E is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            query.exec("update TBL_DOP_INF "
+                        "set UNITS_E = '"+file.getunits_e()+"' "
+                        "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND UNITS_E is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(query.numRowsAffected() < 1)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "В этот сигнал не дописались поля:" << enter_number_eas << " " << file.getkks() << " " << file.getsignal() << '\n';
+                in_log << "Cигнал: " << file.getkks() << " " << file.getsignal() << " EAS "+enter_number_eas+". Таблица TBL_DOP_INF. Не удалось добавить сигнал в базу. Вероятно его нет в файле "+enter_number_eas+".names"<< '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -786,17 +883,9 @@ public:
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
         while (j != enter_hash.constEnd())
         {
-            //file.setnopch(j.value().section('|',1,1));
-
-            //file.setbst_nr(j.value().section('|',2,2));
-
-            //file.setcabinet(enter_cabinets.value(enter_number_eas));
-
             file.setkks(j.value().section('|',0,0));
 
             file.setsignal(j.value().section('|',1,1));
-
-            //file.setsettings_e(j.value().section('|',2,2));
 
             file.setmin(j.value().section('|',3,3));
 
@@ -804,15 +893,25 @@ public:
 
             file.setunits_e(j.value().section('|',5,5));
 
-            //file.setopch(opch);
+            file.setdelta(j.value().section('|',2,2));
 
-            if(!query.exec("update TBL_DOP_INF "
-                            "set MIN_ = '"+file.getmin()+"', MAX_ = '"+file.getmax()+"', UNITS_E = '"+file.getunits_e()+"'  "
-                                                                                                                     "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND MIN_ is null AND MAX_ is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(file.getdelta() == ""){
+                bool ok1;
+                bool ok2;
+                float min = file.getmin().toFloat(&ok1);
+                float max = file.getmax().toFloat(&ok2);
+                float delta_f = (max - min)/100;
+                file.setdelta(QString::number(delta_f));
+            }
+
+            query.exec("update TBL_DOP_INF "
+                       "set MIN_ = '"+file.getmin()+"', MAX_ = '"+file.getmax()+"', UNITS_E = '"+file.getunits_e()+"', DELTA = '"+file.getdelta()+"'  "
+                        "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND MIN_ is null AND MAX_ is null AND UNITS_E is null AND DELTA is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(query.numRowsAffected() < 1)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "В этот сигнал не дописались поля:" << enter_number_eas << " " << file.getkks() << " " << file.getsignal() << '\n';
+                in_log << "Cигнал: " << file.getkks() << " " << file.getsignal() << " EAS "+enter_number_eas+". Таблица TBL_DOP_INF. Не удалось добавить сигнал в базу. Вероятно его нет в файле "+enter_number_eas+".names"<< '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -825,34 +924,18 @@ public:
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
         while (j != enter_hash.constEnd())
         {
-            //file.setnopch(j.value().section('|',1,1));
-
-            //file.setbst_nr(j.value().section('|',2,2));
-
             file.setcabinet(enter_cabinets.value(enter_number_eas));
 
-            file.setkks_kl(j.key());
+            file.setkks_reg(j.key().section('|',1,1));
 
-            file.setkks_reg(j.value());
-
-            //file.setsignal(j.value().section('|',1,1));
-
-            //file.setsettings_e(j.value().section('|',2,2));
-
-            //file.setmin(j.value().section('|',3,3));
-
-            //file.setmax(j.value().section('|',4,4));
-
-            //file.setunits_e(j.value().section('|',5,5));
-
-            //file.setopch(opch);
+            file.setkks_kl(j.key().section('|',0,0));
 
             if(!query.exec("INSERT INTO TBL_KL_REG (CABINET, EA, KL_KKS, REG_KKS) "
                             "VALUES('"+file.getcabinet()+"', '"+enter_number_eas+"' , '"+file.getkks_kl()+"' , '"+file.getkks_reg()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "В этот сигнал не дописались поля:" << enter_number_eas << " " << file.getkks_kl() << " " << file.getkks_reg() << '\n';
+                in_log << "Сигналы: KL - "+file.getkks_kl()+" и REG - "+file.getkks_reg()+" EAS "+enter_number_eas+".Таблица TBL_KL_REG. Сгналы не записались в базу"<< '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -865,34 +948,18 @@ public:
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
         while (j != enter_hash.constEnd())
         {
-            //file.setnopch(j.value().section('|',1,1));
-
-            //file.setbst_nr(j.value().section('|',2,2));
-
             file.setcabinet(enter_cabinets.value(enter_number_eas));
 
             file.setkks_srkr(j.key());
 
             file.settime_srcr(j.value());
 
-            //file.setsignal(j.value().section('|',1,1));
-
-            //file.setsettings_e(j.value().section('|',2,2));
-
-            //file.setmin(j.value().section('|',3,3));
-
-            //file.setmax(j.value().section('|',4,4));
-
-            //file.setunits_e(j.value().section('|',5,5));
-
-            //file.setopch(opch);
-
             if(!query.exec("INSERT INTO TBL_KLAPAN (CABINET, KL_KKS, TRVL_TIME) "
                             "VALUES('"+file.getcabinet()+"', '"+file.getkks_srkr()+"' , '"+file.gettime_srcr()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "В этот сигнал не записался в таблицу TBL_KLAPAN:" << enter_number_eas << " " << file.getkks_srkr() << " " << file.gettime_srcr() << '\n';
+                in_log << "Сигнал: "<< file.getkks_srkr() <<" EAS "+enter_number_eas+". Таблица TBL_KLAPAN. Не удалось добавить сигнал в базу. " << '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -914,7 +981,7 @@ public:
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "Модуль не записался в таблицу TBL_MODUL:" << file.getlocation() << " " << file.getcabinet() << '\n';
+                in_log << "EAS "+enter_number_eas+". Таблица TBL_MODUL. Данный модуль не записался в таблицу:" << file.getlocation() << " " << file.getcabinet() << '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -927,34 +994,16 @@ public:
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
         while (j != enter_hash.constEnd())
         {
-            //file.setnopch(j.value().section('|',1,1));
+            file.setkks_reg(j.key().section('|',0,0));
 
-            //file.setbst_nr(j.value().section('|',2,2));
-
-            //file.setcabinet(enter_cabinets.value(enter_number_eas));
-
-            file.setkks_reg(j.key());
-
-            file.setkks_dat(j.value());
-
-            //file.setsignal(j.value().section('|',1,1));
-
-            //file.setsettings_e(j.value().section('|',2,2));
-
-            //file.setmin(j.value().section('|',3,3));
-
-            //file.setmax(j.value().section('|',4,4));
-
-            //file.setunits_e(j.value().section('|',5,5));
-
-            //file.setopch(opch);
+            file.setkks_dat(j.key().section('|',1,1));
 
             if(!query.exec("INSERT INTO TBL_REGUL (REG_KKS, DAT_KKS, EA) "
                             "VALUES('"+file.getkks_reg()+"' , '"+file.getkks_dat()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "Cигнал не записался в таблицу TBL_REGUL:" << enter_number_eas << " " << file.getkks_reg() << " " << file.getkks_dat() << '\n';
+                in_log << "Регулятор: "+file.getkks_reg()+" и параметр "+file.getkks_dat()+" EAS "+enter_number_eas+". Таблица TBL_REGUL. Не удалось добавить в базу"<< '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -977,7 +1026,7 @@ public:
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "Cигнал не записался в таблицу TBL_RESERV:" << enter_number_eas << " " << file.getslot_main() << " " << file.getslot_res() << '\n';
+                in_log << "Слоты: " +file.getslot_main()+" и "+file.getslot_res()+" EAS "+enter_number_eas+". Таблица TBL_RESERV.  Не удалось добавить в базу"<< '\n';
                 qDebug() << query.lastError().databaseText();
                 file_log.close();
             }
@@ -996,12 +1045,44 @@ public:
             file.settype(j.value());
 
             if(!query.exec("INSERT INTO TBL_VL_IVL (KKS, TYPE, EA) "
-                            "VALUES('"+file.getkks()+"' , '"+file.gettype()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                            "VALUES('"+enter_number_eas+"' , '"+file.gettype()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог
-                in_log << "Cигнал не записался в таблицу TBL_VL_IVL:" << enter_number_eas << " " << file.getkks() << " " << file.gettype() << '\n';
+                in_log << "Сигнал: " +file.getkks()+" EAS "+file.getea()+". Таблица TBL_VL_IVL.  Не удалось добавить сигнал в базу"<< '\n';
                 qDebug() << query.lastError().databaseText();
+                file_log.close();
+            }
+            j++;
+        }
+    }
+    void pars_names(QHash<QString, QString> enter_hash_names, QString enter_number_eas,QHash<QString, QString> enter_cabinets, QFile &file_log) //парсинг файлов и запрос к бд
+    {
+        select_file names; //создали обьект файла неймс
+        QHash<QString, QString>::const_iterator j = enter_hash_names.constBegin();
+        while (j != enter_hash_names.constEnd())
+        {
+            names.setea(enter_number_eas);
+
+            names.setcabinet(enter_cabinets.value(enter_number_eas));
+
+            names.setkks(j.value().section('|',0,0));
+
+            names.setsignal(j.value().section('|',1,1));
+
+            //names.setname_e(j.value().section('|',2,2));
+
+            names.setverwe(j.value().section('|',3,3));
+            //Изменили,чтобы не записывать в базу name_e
+            //if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, NAME_E, VERWE, EA) "
+            //                "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getname_e()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, VERWE, EA) "
+                            "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            {
+                qDebug() << query.lastError().databaseText();
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log <<"Сигнал: "<<names.getkks()<<" "<< names.getsignal() << "EAS "+names.getea()+".Таблица TBL_DOP_INF. Не удалось добавить сигнал в базу из файла "<< enter_number_eas<<".names"<<  '\n';
                 file_log.close();
             }
             j++;
@@ -1013,6 +1094,7 @@ public slots:
     void slot_operationNT(QString dirSelect, QSqlDatabase db);
 signals:
     void signal_closeWait();
+    void signal_wrightWidgLog(QString);
 private:
     QVector<QString> select_all_EM{".aks",".mks",".faw",".fbw",".em",".es",".ibr", ".ite", ".ivl", ".ko", ".kr",".sr", ".te", ".vl",
                                    ".alarms" , ".delta",".kl_reg" , ".sr_kr" , ".ext_mod", ".regul" , ".res_mod" , ".vl_ivl" , ".daq"}; //список всех расширений select_all без names для ТПТС ЕМ
@@ -1060,6 +1142,8 @@ public:
 
 public slots:
     void slot_closeWait();
+
+    void slot_wrightWidgLog(QString);
 private slots:
     void on_button_dir_db_clicked();
 
