@@ -855,17 +855,17 @@ public:
 
             file.setsignal(j.value().section('|',1,1));
 
-            //file.setsettings_e(j.value().section('|',2,2));
+            file.setsettings_e(j.value().section('|',2,2));
 
             file.setunits_e(j.value().section('|',5,5));
 
             //Убрали чтобы не записывать settings в базу
-            //if(!query.exec("update TBL_DOP_INF "
-            //                "set SETTINGS_E = '"+file.getsettings_e()+"', UNITS_E = '"+file.getunits_e()+"' "
-            //               "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND SETTINGS_E is null AND UNITS_E is null;")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             query.exec("update TBL_DOP_INF "
-                        "set UNITS_E = '"+file.getunits_e()+"' "
-                        "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND UNITS_E is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                        "set SETTINGS_E = '"+file.getsettings_e()+"', UNITS_E = '"+file.getunits_e()+"' "
+                        "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND SETTINGS_E is null AND UNITS_E is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            //query.exec("update TBL_DOP_INF "
+            //            "set UNITS_E = '"+file.getunits_e()+"' "
+            //            "where KKS='"+file.getkks()+"' AND SIGNAL='"+file.getsignal()+"' AND EA='"+enter_number_eas+"' AND UNITS_E is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
             if(query.numRowsAffected() < 1)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
@@ -1070,14 +1070,14 @@ public:
 
             names.setsignal(j.value().section('|',1,1));
 
-            //names.setname_e(j.value().section('|',2,2));
+            names.setname_e(j.value().section('|',2,2));
 
             names.setverwe(j.value().section('|',3,3));
             //Изменили,чтобы не записывать в базу name_e
-            //if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, NAME_E, VERWE, EA) "
-            //                "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getname_e()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
-            if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, VERWE, EA) "
-                            "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, NAME_E, VERWE, EA) "
+                            "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getname_e()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+            //if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, SIGNAL, VERWE, EA) "
+            //                "VALUES('"+names.getcabinet()+"' ,'"+names.getkks()+"' , '"+names.getsignal()+"' , '"+names.getverwe()+"' , '"+names.getea()+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 qDebug() << query.lastError().databaseText();
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
