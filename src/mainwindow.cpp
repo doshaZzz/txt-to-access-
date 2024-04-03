@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    open_help = new help;
+    //open_help->setModal(true);
     wait = new wait_time; //инициализируем обьект окна
     wait->setModal(true); //делаем окно модальным,чтобы блокировались остальные окна
     pThread = new QThread(this);
@@ -53,6 +55,7 @@ void Worker::slot_operationEM(QString dir_select, QSqlDatabase db)
     QHash<QString, QString> cabinets = create_hash_cabinets(); //создаем hash c кабинетами
     create_tables(rfile_log); //создаем таблицы в бд
     QList<QString> select_names = QDir(dir_select).entryList(QStringList("*.names")); //показывает все файлы в директории c расширением *.names
+    QString dir_select_for_log = dir_select;
     dir_select = dir_select.append("\\\\");
     for (int i = 0; i < select_names.size(); i++) //проход по всем файлам неймс
     {
@@ -63,6 +66,7 @@ void Worker::slot_operationEM(QString dir_select, QSqlDatabase db)
         /*------------------------------------------------------.names--------------------------------------------*/
         QString path_names = dir_select + select_names[i]; //путь к файлу неймс
         QHash<QString,QString> hash_names = create_hash_names(path_names, number_eas, rfile_log); //создание хешм неймс
+        create_hash_all(hash_names,number_eas,rfile_log);
         if(hash_names.constBegin() != hash_names.constEnd())
         {
             pars_names(hash_names, number_eas,cabinets,rfile_log); //парсим строки в хеш и сразу кидаем в базу
@@ -160,6 +164,8 @@ void Worker::slot_operationEM(QString dir_select, QSqlDatabase db)
     in_log << "-----------------------------------------------------------------------------------------------------" << '\n'; //для обозначения конца лога
     file_log.close();
     query.finish();
+    hash_all.clear();
+    emit signal_wrightWidgLog("Сигналы не записанные в базу буду находиться в лог файле:\n"+dir_select_for_log+'-'+"log.txt");
     emit signal_closeWait();
 }
 
@@ -171,6 +177,7 @@ void Worker::slot_operationNT(QString dir_select, QSqlDatabase db)
     QHash<QString, QString> cabinets = create_hash_cabinets(); //создаем hash c кабинетами
     create_tables(rfile_log); //создаем таблицы в бд
     QList<QString> select_names = QDir(dir_select).entryList(QStringList("*.names")); //показывает все файлы в директории c расширением *.names
+    QString dir_select_for_log = dir_select;
     dir_select = dir_select.append("\\\\");
     for (int i = 0; i < select_names.size(); i++) //проход по всем файлам неймс
     {
@@ -181,6 +188,7 @@ void Worker::slot_operationNT(QString dir_select, QSqlDatabase db)
         /*------------------------------------------------------.names--------------------------------------------*/
         QString path_names = dir_select + select_names[i]; //путь к файлу неймс
         QHash<QString,QString> hash_names = create_hash_names(path_names, number_eas, rfile_log); //создание хешм неймс
+        create_hash_all(hash_names,number_eas,rfile_log);
         if(hash_names.constBegin() != hash_names.constEnd())
         {
             pars_names(hash_names, number_eas,cabinets,rfile_log); //парсим строки в хеш и сразу кидаем в базу
@@ -286,6 +294,8 @@ void Worker::slot_operationNT(QString dir_select, QSqlDatabase db)
     in_log << "-----------------------------------------------------------------------------------------------------" << '\n'; //для обозначения конца лога
     file_log.close();
     query.finish();
+    hash_all.clear();
+    emit signal_wrightWidgLog("Сигналы не записанные в базу буду находиться в лог файле:\n"+dir_select_for_log+'-'+"log.txt");
     emit signal_closeWait();
 }
 
@@ -383,5 +393,8 @@ void MainWindow::on_button_start_clicked() //кнопка старт
 
 
 
-
+void MainWindow::on_pushButton_clicked()
+{
+    open_help->show();
+}
 

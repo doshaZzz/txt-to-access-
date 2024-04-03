@@ -13,6 +13,18 @@
     <height>58</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>345</width>
+    <height>58</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>345</width>
+    <height>58</height>
+   </size>
+  </property>
   <property name="tabletTracking">
    <bool>false</bool>
   </property>
@@ -20,7 +32,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Wait</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>

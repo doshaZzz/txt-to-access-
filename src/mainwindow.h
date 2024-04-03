@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "ui_mainwindow.h"
 #include "wait_time.h"
+#include "help.h"
 
 #include <QWidget>
 #include <QSqlDatabase>
@@ -459,7 +460,7 @@ public:
                     }
                     else
                     {
-                        in_log << "Сигнал "<<  line.section('|',0,1) <<"; Данный сигнал не записан в базу т.к там уже имеется такой сигнал. Дубль в файле "<< path_names<< '\n';
+                        in_log << "Сигнал: "<<  line.section('|',0,1) <<"; Данный сигнал не записан в базу т.к там уже имеется такой сигнал. Дубль в файле "<< path_names<< '\n';
                     }
                 }
                 file.close();
@@ -480,6 +481,21 @@ public:
             return hash_names;
         }
         return hash_names;
+    }
+    void create_hash_all(QHash<QString,QString> hash_names,QString enter_number_eas, QFile &file_log) //создание хеша names
+    {
+        for (auto i = hash_names.cbegin(), end = hash_names.cend(); i != end; ++i){
+            //QString key = i.key();
+            if(!hash_all.contains(i.key())){ //проверяем совпадения в хеше
+                hash_all.insert(i.key(),i.value());
+            } else {
+                file_log.open(QIODevice::Append); //открываем новый файл  на запись
+                QTextStream in_log(&file_log); //поток в лог
+                in_log << "Сигнал: "<<  i.key() <<" EAS: "+enter_number_eas+" добавлен в базу,но он уже имеется в нескольких кабинетах.\n";
+                file_log.close();
+            }
+        }
+        return;
     }
     QHash<QString,QString> create_hash_cabinets() //создание хеша с кабинетами
     {
@@ -1104,6 +1120,7 @@ private:
     QString data_base = " ";  //путь к файлу базы данных
     QSqlDatabase db; //обьект база данных
     QSqlQuery query; //обьект запроса к бд
+    QHash<QString,QString> hash_all;
 };
 
 
@@ -1153,12 +1170,15 @@ private slots:
 
     void on_button_start_clicked();
 
+    void on_pushButton_clicked();
+
 signals:
     void signal_operationEM(QString, QSqlDatabase);
     void signal_operationNT(QString,QSqlDatabase);
 private:
     Ui::MainWindow* ui;
     wait_time* wait; //обьект класса второго окна
+    help* open_help;
     Worker* pW;
     QString dir_select = nullptr; //путь к директории с селектами
     QString data_base = " ";  //путь к файлу базы данных
