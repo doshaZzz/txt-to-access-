@@ -80,12 +80,12 @@
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>361</width>
+      <width>551</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Выберете папку с ИД, который хотите перенести в access</string>
+     <string>Выберете папку с исходными данными, который хотите перенести в базу данных MS Access</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_dir_db">
@@ -125,12 +125,12 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>421</width>
+      <width>491</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Выберете  базу данных access, в которую будут записаны данные</string>
+     <string>Выберете  базу данных MS Access в формате accdb, в которую будут записаны данные</string>
     </property>
    </widget>
    <widget class="QPushButton" name="button_clear_db">

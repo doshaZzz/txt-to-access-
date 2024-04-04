@@ -1170,7 +1170,7 @@ private slots:
 
     void on_button_start_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_clicked(); //кнопка i
 
 signals:
     void signal_operationEM(QString, QSqlDatabase);
@@ -1192,4 +1192,5 @@ private:
     QThread* pThread;
 //    QHash<QString,QString> hash_names;
 };
+
 #endif // MAINWINDOW_H

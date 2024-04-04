@@ -393,7 +393,7 @@ void MainWindow::on_button_start_clicked() //кнопка старт
 
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked() //кнопка i
 {
     open_help->show();
 }
