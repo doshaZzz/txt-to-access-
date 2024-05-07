@@ -828,7 +828,7 @@ public:
             j++;
         }
     }
-    void pars_group_te_vl(QString opch, QHash<QString, QString> enter_hash, QString enter_number_eas,QHash<QString, QString> enter_cabinets, QFile &file_log) //.te[EAS].vl .iten .ivln
+    void pars_group_te_vl(QString opch, QHash<QString, QString> enter_hash, QString enter_number_eas,QHash<QString, QString> enter_cabinets ,QHash<QString, QString> hash_names, QFile &file_log) //.te[EAS].vl .iten .ivln
     {
         select_file file;
         QHash<QString, QString>::const_iterator j = enter_hash.constBegin();
@@ -846,11 +846,13 @@ public:
 
             query.exec("update TBL_DOP_INF "
                        "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                                                                                                                  "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='"+nullptr+"' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                       "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='"+nullptr+"' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
             if(query.numRowsAffected() < 1)
             {
-                if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, OPCH, NOPCH, EA, BST_NR) "
-                                "VALUES('"+file.getcabinet()+"' , '"+file.getkks()+"' , '"+file.getopch()+"' , '"+file.getnopch()+"' , '"+file.getea()+"' , '"+file.getbst_nr()+"')")){
+                QString name_ee = hash_names.value(j.key()+'|');
+                file.setname_e(name_ee.section('|',2,2));
+                if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, OPCH, NOPCH, EA, BST_NR, NAME_E) "
+                                "VALUES('"+file.getcabinet()+"' , '"+file.getkks()+"' , '"+file.getopch()+"' , '"+file.getnopch()+"' , '"+file.getea()+"' , '"+file.getbst_nr()+"' , '"+file.getname_e()+"')")){
                     file_log.open(QIODevice::Append); //открываем новый файл  на запись
                     QTextStream in_log(&file_log); //поток в лог
                     in_log << "Сигнал: " << file.getkks() <<" "<< file.getopch() <<"; EAS "+enter_number_eas+"; Таблица TBL_DOP_INF; Не удалось добавить сигнал в базу."<< '\n';
@@ -1061,7 +1063,7 @@ public:
             file.settype(j.value());
 
             if(!query.exec("INSERT INTO TBL_VL_IVL (KKS, TYPE, EA) "
-                            "VALUES('"+enter_number_eas+"' , '"+file.gettype()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                            "VALUES('"+file.getkks()+"' , '"+file.gettype()+"' , '"+enter_number_eas+"')")) //добавляем в таблицу (в столбецы (...) такие то данные(...)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
                 QTextStream in_log(&file_log); //поток в лог

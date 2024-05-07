@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //this->setStyleSheet("background-color: blue;");
     open_help = new help;
     //open_help->setModal(true);
     wait = new wait_time; //инициализируем обьект окна
@@ -97,7 +98,7 @@ void Worker::slot_operationEM(QString dir_select, QSqlDatabase db)
                 QHash<QString,QString> hash_group_te_vl = create_hash_group_equip(path_group_te_vl, rfile_log); //создание хеш
                 if(hash_group_te_vl.begin() != hash_group_te_vl.end())
                 {
-                    pars_group_te_vl(opch.value(i),hash_group_te_vl,number_eas,cabinets,rfile_log);
+                    pars_group_te_vl(opch.value(i),hash_group_te_vl,number_eas,cabinets,hash_names,rfile_log);
                 }
             }
             /*------------------------------------------.alarms---------------------------------------------------------*/
@@ -222,7 +223,7 @@ void Worker::slot_operationNT(QString dir_select, QSqlDatabase db)
                 QHash<QString,QString> hash_iten_ivln = create_hash_group_equip(path_group_iten_ivln, rfile_log); //создание хеш
                 if(hash_iten_ivln.begin() != hash_iten_ivln.end())
                 {
-                    pars_group_te_vl(opch.value(i),hash_iten_ivln,number_eas,cabinets,rfile_log);
+                    pars_group_te_vl(opch.value(i),hash_iten_ivln,number_eas,cabinets,hash_names,rfile_log);
                 }
             }
             /*------------------------------------------kom.reg.cru.icum.icus.icuv---------------------------------*/
