@@ -497,7 +497,7 @@ public:
         }
         return;
     }
-    QHash<QString,QString> create_hash_cabinets() //создание хеша с кабинетами
+    QHash<QString,QString> create_hash_cabinets_3() //создание хеша с кабинетами
     {
         QHash<QString, QString> cabinets;
         /*птк ску ро*/
@@ -547,6 +547,8 @@ public:
         cabinets.insert("311","30CMY01");
         cabinets.insert("312","30CMY02");
         cabinets.insert("313","30CMY03");
+		
+		/*птк тг*/
         cabinets.insert("401","30CMX01");
         cabinets.insert("422","30CMX01");
         cabinets.insert("402","30CMX02");
@@ -560,7 +562,7 @@ public:
         cabinets.insert("506","30CMW06");
         cabinets.insert("507","30CMW07");
         cabinets.insert("508","30CMW08");
-        cabinets.insert("509","30CMW60");
+        cabinets.insert("509","30CMW09");
 
         /*птк ску в*/
         cabinets.insert("601","30CMV01");
@@ -571,7 +573,7 @@ public:
         cabinets.insert("606","30CMV06");
         cabinets.insert("607","30CMV07");
         cabinets.insert("608","30CMV08");
-        cabinets.insert("609","30CMV60");
+        cabinets.insert("609","30CMV09");
 
         /*птк ску во*/
         cabinets.insert("612","30CMS51");
@@ -584,6 +586,97 @@ public:
 
         return cabinets;
     }
+
+    QHash<QString,QString> create_hash_cabinets_4() //создание хеша с кабинетами
+    {
+        QHash<QString, QString> cabinets;
+        /*птк ску ро*/
+        cabinets.insert("101","40CMR01");
+        cabinets.insert("102","40CMR02");
+        cabinets.insert("103","40CMR03");
+        cabinets.insert("104","40CMR04");
+        cabinets.insert("105","40CMR05");
+        cabinets.insert("106","40CMR06");
+        cabinets.insert("107","40CMR07");
+        cabinets.insert("108","40CMR08");
+        cabinets.insert("109","40CMR09");
+        cabinets.insert("210","40CMR10");
+        cabinets.insert("211","40CMR11");
+        cabinets.insert("212","40CMR12");
+        cabinets.insert("213","40CMR13");
+        cabinets.insert("214","40CMR14");
+        cabinets.insert("215","40CMR15");
+        cabinets.insert("216","40CMR16");
+        cabinets.insert("217","40CMR17");
+
+        /*птк ску то*/
+        cabinets.insert("301","40CMT01");
+        cabinets.insert("302","40CMT02");
+        cabinets.insert("303","40CMT03");
+        cabinets.insert("304","40CMT04");
+        cabinets.insert("305","40CMT05");
+        cabinets.insert("306","40CMT06");
+        cabinets.insert("307","40CMT07");
+        cabinets.insert("308","40CMT08");
+        cabinets.insert("309","40CVT60");
+        cabinets.insert("409","40CMT09");
+        cabinets.insert("410","40CMT10");
+        cabinets.insert("411","40CMT11");
+        cabinets.insert("412","40CMT12");
+        cabinets.insert("413","40CMT13");
+        cabinets.insert("414","40CMT14");
+        cabinets.insert("415","40CMT15");
+        cabinets.insert("416","40CMT16");
+        cabinets.insert("417","40CMT17");
+        cabinets.insert("418","40CMT18");
+        cabinets.insert("419","40CMT19");
+        cabinets.insert("420","40CMT20");
+        cabinets.insert("421","40CMT21");
+
+        /*птк эчср*/
+        cabinets.insert("311","40CMY01");
+        cabinets.insert("312","40CMY02");
+        cabinets.insert("313","40CMY03");
+
+        /*птк тг*/
+        cabinets.insert("401","40CMX01");
+        cabinets.insert("422","40CMX01");
+        cabinets.insert("402","40CMX02");
+
+        /*птк ску во*/
+        cabinets.insert("501","40CMW01");
+        cabinets.insert("502","40CMW02");
+        cabinets.insert("503","40CMW03");
+        cabinets.insert("504","40CMW04");
+        cabinets.insert("505","40CMW05");
+        cabinets.insert("506","40CMW06");
+        cabinets.insert("507","40CMW07");
+        cabinets.insert("508","40CMW08");
+        cabinets.insert("509","40CMW09");
+
+        /*птк ску в*/
+        cabinets.insert("601","40CMV01");
+        cabinets.insert("602","40CMV02");
+        cabinets.insert("603","40CMV03");
+        cabinets.insert("604","40CMV04");
+        cabinets.insert("605","40CMV05");
+        cabinets.insert("606","40CMV06");
+        cabinets.insert("607","40CMV07");
+        cabinets.insert("608","40CMV08");
+        cabinets.insert("609","40CMV09");
+
+        /*птк ску во*/
+        cabinets.insert("612","40CMS51");
+        cabinets.insert("613","40CMS52");
+        cabinets.insert("614","40CMS53");
+
+        /*ТЕСТОВЫЕ*/
+        cabinets.insert("406","ТЕСТ 406");
+        cabinets.insert("407","ТЕСТ 407");
+
+        return cabinets;
+    }
+
     QHash<QString,QString> create_hash_group(QString path_group1, QFile &file_log) //создание хеша aks,mks,faw,fbw,alarms,delta,ats,esgm,esgs,esgv,ibrn,iten,ivln,kom,reg,cru,icum,icus,icuv
     {
         QHash<QString,QString> hash_group1;
@@ -782,7 +875,11 @@ public:
 
             file.setkks(j.value().section('|',0,0));
 
-            file.setsignal(j.value().section('|',1,1));
+            if(j.value().section('|',1,1) == nullptr){                  //test
+                file.setsignal("-");
+            } else {
+                file.setsignal(j.value().section('|',1,1));
+            }
 
             file.setopch(opch);
 
@@ -816,7 +913,7 @@ public:
 
             query.exec("update TBL_DOP_INF "
                         "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                        "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='"+nullptr+"' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                        "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='-' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
             if(query.numRowsAffected() < 1)
             {
                 file_log.open(QIODevice::Append); //открываем новый файл  на запись
@@ -846,13 +943,13 @@ public:
 
             query.exec("update TBL_DOP_INF "
                        "set OPCH = '"+file.getopch()+"', NOPCH = '"+file.getnopch()+"', BST_NR = '"+file.getbst_nr()+"' "
-                       "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='"+nullptr+"' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
+                       "where KKS='"+file.getkks()+"' AND EA='"+enter_number_eas+"' AND SIGNAL ='-' AND OPCH is null AND NOPCH is null AND BST_NR is null;"); //добавляем в таблицу (в столбецы (...) такие то данные(...)
             if(query.numRowsAffected() < 1)
             {
                 QString name_ee = hash_names.value(j.key()+'|');
                 file.setname_e(name_ee.section('|',2,2));
-                if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, OPCH, NOPCH, EA, BST_NR, NAME_E) "
-                                "VALUES('"+file.getcabinet()+"' , '"+file.getkks()+"' , '"+file.getopch()+"' , '"+file.getnopch()+"' , '"+file.getea()+"' , '"+file.getbst_nr()+"' , '"+file.getname_e()+"')")){
+                if(!query.exec("INSERT INTO TBL_DOP_INF (CABINET, KKS, OPCH, NOPCH, EA, BST_NR, NAME_E, SIGNAL) "
+                                "VALUES('"+file.getcabinet()+"' , '"+file.getkks()+"' , '"+file.getopch()+"' , '"+file.getnopch()+"' , '"+enter_number_eas+"' , '"+file.getbst_nr()+"' , '"+file.getname_e()+"' , '-')")){ //file.getea()
                     file_log.open(QIODevice::Append); //открываем новый файл  на запись
                     QTextStream in_log(&file_log); //поток в лог
                     in_log << "Сигнал: " << file.getkks() <<" "<< file.getopch() <<"; EAS "+enter_number_eas+"; Таблица TBL_DOP_INF; Не удалось добавить сигнал в базу."<< '\n';
@@ -871,7 +968,11 @@ public:
         {
             file.setkks(j.value().section('|',0,0));
 
-            file.setsignal(j.value().section('|',1,1));
+            if(j.value().section('|',1,1) == nullptr){                  //test
+                file.setsignal("-");
+            } else {
+                file.setsignal(j.value().section('|',1,1));
+            }
 
             file.setsettings_e(j.value().section('|',2,2));
 
@@ -903,7 +1004,11 @@ public:
         {
             file.setkks(j.value().section('|',0,0));
 
-            file.setsignal(j.value().section('|',1,1));
+            if(j.value().section('|',1,1) == nullptr){                  //test
+                file.setsignal("-");
+            } else {
+                file.setsignal(j.value().section('|',1,1));
+            }
 
             file.setmin(j.value().section('|',3,3));
 
@@ -1086,7 +1191,11 @@ public:
 
             names.setkks(j.value().section('|',0,0));
 
-            names.setsignal(j.value().section('|',1,1));
+            if(j.value().section('|',1,1) == nullptr){                  //test
+                names.setsignal("-");
+            } else {
+                names.setsignal(j.value().section('|',1,1));
+            }
 
             names.setname_e(j.value().section('|',2,2));
 

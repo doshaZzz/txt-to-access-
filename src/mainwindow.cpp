@@ -53,7 +53,7 @@ void Worker::slot_operationEM(QString dir_select, QSqlDatabase db)
     query = QSqlQuery(db); //создаем экземпляр обьекта запроса и привязываем его к БД
     QFile file_log(dir_select+'-'+"log.txt"); //создаем новый файл для хранения log
     QFile &rfile_log = file_log; //создаем ссылку на лог файл для передачи в функцию
-    QHash<QString, QString> cabinets = create_hash_cabinets(); //создаем hash c кабинетами
+    QHash<QString, QString> cabinets = create_hash_cabinets_3(); //создаем hash c кабинетами
     create_tables(rfile_log); //создаем таблицы в бд
     QList<QString> select_names = QDir(dir_select).entryList(QStringList("*.names")); //показывает все файлы в директории c расширением *.names
     QString dir_select_for_log = dir_select;
@@ -175,7 +175,7 @@ void Worker::slot_operationNT(QString dir_select, QSqlDatabase db)
     query = QSqlQuery(db); //создаем экземпляр обьекта запроса и привязываем его к БД
     QFile file_log(dir_select+'-'+"log.txt"); //создаем новый файл для хранения log
     QFile &rfile_log = file_log; //создаем ссылку на лог файл для передачи в функцию
-    QHash<QString, QString> cabinets = create_hash_cabinets(); //создаем hash c кабинетами
+    QHash<QString, QString> cabinets = create_hash_cabinets_4(); //создаем hash c кабинетами
     create_tables(rfile_log); //создаем таблицы в бд
     QList<QString> select_names = QDir(dir_select).entryList(QStringList("*.names")); //показывает все файлы в директории c расширением *.names
     QString dir_select_for_log = dir_select;
